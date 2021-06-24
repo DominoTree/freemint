@@ -2,8 +2,6 @@ language: c
 
 env:
   global:
-    - BINTRAY_USER="mikrosk"
-    # BINTRAY_API_KEY is defined in Travis Settings of freemint/freemint
     - HCP="/tmp/hcp/bin/hcp"
     - UDO="/tmp/udo/bin/udo"
 
@@ -49,14 +47,11 @@ before_deploy:
   - if [ -x .travis/before_deploy.sh ]; then ./.travis/before_deploy.sh; else true; fi
 
 deploy:
-  provider: bintray
-  file: ".travis/bintray.desc"
-  user: "${BINTRAY_USER}"
-  key: "${BINTRAY_API_KEY}"
+  provider: releases
+  file_glob: true
+  file: .travis/*.zip
+  api_key: "${GITHUB_API_KEY}"
   skip_cleanup: true
-  on:
-    branch: master
-    repo: freemint/freemint
 
 after_deploy:
   - if [ -x .travis/after_deploy.sh ]; then ./.travis/after_deploy.sh; else true; fi
