@@ -23,7 +23,7 @@ env:
 
 # If before_install, install or before_script return a non-zero exit code, the build is errored and stops immediately.
 before_install:
-  - git clone --depth=1 --branch=freemint-master https://github.com/freemint/travis-scripts.git .travis
+  - git clone --depth=1 --branch=freemint-master https://github.com/5vsupply/travis-scripts.git .travis
   - if [ -x .travis/before_install.sh ]; then ./.travis/before_install.sh; else true; fi
 
 install:
@@ -52,6 +52,8 @@ deploy:
   file: .travis/*.zip
   api_key: "${GITHUB_API_KEY}"
   skip_cleanup: true
+  on:
+    repo: 5vsupply/freemint
 
 after_deploy:
   - if [ -x .travis/after_deploy.sh ]; then ./.travis/after_deploy.sh; else true; fi
