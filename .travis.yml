@@ -52,8 +52,6 @@ deploy:
   file: .travis/*.zip
   api_key: "${GITHUB_API_KEY}"
   skip_cleanup: true
-  on:
-    repo: 5vsupply/freemint
 
 after_deploy:
   - if [ -x .travis/after_deploy.sh ]; then ./.travis/after_deploy.sh; else true; fi
